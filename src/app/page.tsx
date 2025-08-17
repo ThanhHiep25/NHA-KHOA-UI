@@ -53,7 +53,7 @@ export default function Home() {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="fixed top-30 right-8 z-50 bg-purple-400 hover:bg-blue-500 text-white p-4 rounded-xl shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group"
+            className="fixed top-30 right-8 z-30 bg-purple-400 hover:bg-blue-500 text-white p-4 rounded-xl shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group"
             aria-label="Hotline"
             title="Hotline"
             style={{
@@ -71,7 +71,7 @@ export default function Home() {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="fixed top-50 right-8 z-50 bg-purple-400 hover:bg-blue-500 text-white p-4 rounded-xl shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group"
+            className="fixed top-50 right-8 z-30 bg-purple-400 hover:bg-blue-500 text-white p-4 rounded-xl shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group"
             aria-label="Zalo"
             title="Zalo"
             style={{
@@ -91,7 +91,7 @@ export default function Home() {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="fixed top-70 right-8 z-50 bg-purple-400 hover:bg-blue-500 text-white p-4 rounded-xl shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group"
+            className="fixed top-70 right-8 z-30 bg-purple-400 hover:bg-blue-500 text-white p-4 rounded-xl shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group"
             aria-label="Địa chỉ"
             title="Địa chỉ"
             style={{
@@ -109,7 +109,7 @@ export default function Home() {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="fixed top-90 right-8 z-50 bg-purple-400 hover:bg-blue-500 text-white p-4 rounded-xl shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group"
+            className="fixed top-90 right-8 z-30 bg-purple-400 hover:bg-blue-500 text-white p-4 rounded-xl shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group"
             aria-label="Địa chỉ"
             title="Địa chỉ"
             style={{
@@ -126,7 +126,7 @@ export default function Home() {
         showChat && (
           <button
             onClick={toggleChatPopup}
-            className="fixed bottom-30 right-8 z-50 bg-blue-400 hover:bg-blue-500 text-white p-4 rounded-full shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group"
+            className="fixed bottom-30 right-8 z-30 bg-blue-400 hover:bg-blue-500 text-white p-4 rounded-full shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group"
             aria-label="Trở về đầu trang"
             style={{
               boxShadow: "0 4px 24px 0 rgba(255, 193, 7, 0.4)",
@@ -150,7 +150,7 @@ export default function Home() {
       {showTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 bg-purple-400 hover:bg-purple-500 text-white p-2 rounded-full shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group animate-bounce"
+          className="fixed bottom-8 right-8 z-30 bg-purple-400 hover:bg-purple-500 text-white p-2 rounded-full shadow-xl border-4 border-white animate-bounce-slow transition-all duration-300 flex items-center justify-center group animate-bounce"
           aria-label="Trở về đầu trang"
           style={{
             boxShadow: "0 4px 24px 0 rgba(255, 193, 7, 0.4)",
