@@ -128,7 +128,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: 50 }}
                                 transition={{ duration: 0.3 }}
-                                className="space-y-4 overflow-y-auto h-[650px] scrollbar-hide"
+                                className="space-y-4 overflow-y-auto h-[650px] scrollbar-hide overflow-x-hidden"
                             >
                                 <div className="flex items-center gap-1">
                                     <motion.img src="/IMGLADING/Camtudental-doctor-holding-phone-to-support-customers-797x1024.png" alt="Image"
@@ -230,7 +230,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -50 }}
                                 transition={{ duration: 0.3 }}
-                                className="space-y-4"
+                                className="space-y-4 overflow-y-auto h-[650px] scrollbar-hide overflow-x-hidden"
                             >
                                 <div className="flex items-center gap-1">
                                     <motion.img src="/IMGLADING/Camtudental-doctor-holding-phone-to-support-customers-797x1024.png" alt="Image"
@@ -240,54 +240,91 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                                         Vui lòng điền thông tin đặt hẹn
                                     </h1>
                                 </div>
-                                <div>
-                                    <label className="block text-gray-700">Họ và tên</label>
-                                    <input
-                                        type="text"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                        className="w-full mt-1 p-3 border-b-2 border-b-yellow-600 border-gray-300 focus:outline-none"
-                                        required
-                                    />
+
+                                <div className="md:flex md:items-center md:justify-between md:gap-10">
+                                    <div className="md:w-full">
+                                        <label className="block text-purple-700">Họ và tên</label>
+                                        <input
+                                            type="text"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            className="w-full mt-1 p-3 border-b-2 border-b-yellow-400 border-gray-300 focus:outline-none"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="md:w-full">
+                                        <label className="block text-purple-700">Email</label>
+                                        <input
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            className="w-full mt-1 p-3 border-b-2 border-b-yellow-400 border-gray-300 focus:outline-none"
+                                            required
+                                        />
+                                    </div>
                                 </div>
-                                <div>
-                                    <label className="block text-gray-700">Email</label>
-                                    <input
-                                        type="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full mt-1 p-3 border-b-2 border-b-yellow-600 border-gray-300 focus:outline-none"
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-gray-700">Số điện thoại</label>
-                                    <input
-                                        type="tel"
-                                        value={phone}
-                                        onChange={(e) => setPhone(e.target.value)}
-                                        className="w-full mt-1 p-3 border-b-2 border-b-yellow-600 border-gray-300 focus:outline-none"
-                                        required
-                                    />
+                                <div className="md:flex md:items-center md:justify-between md:gap-10">
+                                    <div className="md:w-full">
+                                        <label className="block text-purple-700">Số điện thoại</label>
+                                        <input
+                                            type="tel"
+                                            value={phone}
+                                            onChange={(e) => setPhone(e.target.value)}
+                                            className="w-full mt-1 p-3 border-b-2 border-b-yellow-400 border-gray-300 focus:outline-none"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div className="md:w-full">
+                                        <h3 className="text-purple-700 mb-4">Phương thức tư vấn</h3>
+                                        <div className="w-full flex flex-wrap gap-4">
+                                            <div className="flex items-center gap-2">
+                                                <input type="checkbox" name="rangsu" id="rangsu" className="text-purple-600" value={""} />
+                                                <label className="block text-yellow-500">Răng Sứ</label>
+                                            </div>
+
+                                            <div className="flex items-center gap-2">
+                                                <input type="checkbox" name="zalo" id="zalo" className="text-purple-600" value={""} />
+                                                <label className="block text-yellow-500">Implant</label>
+                                            </div>
+
+                                            <div className="flex items-center gap-2">
+                                                <input type="checkbox" name="zalo" id="zalo" className="text-purple-600" value={""} />
+                                                <label className="block text-yellow-500">Tổng quát/Vệ sinh răng</label>
+                                            </div>
+
+                                            <div className="flex items-center gap-2">
+                                                <input type="checkbox" name="zalo" id="zalo" className="text-purple-600" value={""} />
+                                                <label className="block text-yellow-500">Tẩy trắng</label>
+                                            </div>
+
+                                            <div className="flex items-center gap-2">
+                                                <input type="checkbox" name="zalo" id="zalo" className="text-purple-600" value={""} />
+                                                <label className="block text-yellow-500">Khác</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label className="block text-gray-700">Ngày</label>
+                                        <label className="block text-purple-700">Ngày</label>
                                         <input
                                             type="date"
                                             value={date}
                                             onChange={(e) => setDate(e.target.value)}
-                                            className="w-full mt-1 p-3 border-b-2 border-b-yellow-600 border-gray-300 focus:outline-none"
+                                            className="w-full mt-1 p-3 border-b-2 border-b-yellow-400 border-gray-300 focus:outline-none"
                                             required
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-gray-700">Giờ</label>
+                                        <label className="block text-purple-700">Giờ</label>
                                         <input
                                             type="time"
                                             value={time}
                                             onChange={(e) => setTime(e.target.value)}
-                                            className="w-full mt-1 p-3 border-b-2 border-b-yellow-600 border-gray-300 focus:outline-none"
+                                            className="w-full mt-1 p-3 border-b-2 border-b-yellow-400 border-gray-300 focus:outline-none"
                                             required
                                         />
                                     </div>
@@ -296,7 +333,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     type="submit"
-                                    className="w-full bg-blue-600 text-white font-semibold py-3 rounded-md transition duration-300 hover:bg-blue-700"
+                                    className="w-full mt-10 bg-purple-600 text-white font-semibold py-3 rounded-md transition duration-300 hover:bg-purple-700"
                                 >
                                     Gửi yêu cầu hẹn
                                 </motion.button>

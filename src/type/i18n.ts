@@ -17,7 +17,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    resources, // Sử dụng resources đã import
+    resources, 
     fallbackLng: 'vi',
     debug: true,
     interpolation: {
