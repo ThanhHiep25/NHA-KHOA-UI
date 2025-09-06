@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { login } from '@/services/auth_api';
+import { toast } from 'react-toastify';
 
 interface AuthModalProps {
     isOpen: boolean;
@@ -27,6 +28,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             // Lưu token vào localStorage hoặc cookie nếu cần
             localStorage.setItem('accessToken', res.data.accessToken);
             localStorage.setItem('refreshToken', res.data.refreshToken);
+            toast.success('Đăng nhập thành công');
             // Đóng modal hoặc chuyển hướng
             onClose();
         } else {
