@@ -1,5 +1,9 @@
 {
   "login": "Login",
+  "remember": "Remember me",
+  "logout": "Logout",
+  "profile": "Profile",
+  "settings": "Settings",
   "register": "Register",
   "password": "Password",
   "fpassword": "Forgot Password ?",

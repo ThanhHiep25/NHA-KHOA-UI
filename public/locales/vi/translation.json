@@ -1,6 +1,10 @@
 {
   
   "login": "Đăng Nhập",
+  "remember": "Ghi Nhớ Tôi",
+  "logout": "Đăng Xuất",
+  "profile": "Hồ Sơ",
+  "settings": "Cài Đặt",
   "register": "Đăng Ký",
   "password": "Mật Khẩu",
   "fpassword": "Quên Mật Khẩu ?",

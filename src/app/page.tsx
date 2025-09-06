@@ -1,13 +1,10 @@
 'use client'
 
 import ChatPopup from "@/component/chatbot/ChatPopup";
-import Footer from "@/component/footer/page";
+import Footer from "@/component/footer/Footer";
 import LadingPage from "@/component/lading/page";
-import Menu from "@/component/menu/Menu";
-import AppointmentModal from "@/component/model/Appointment";
 import { AnimatePresence, motion } from "framer-motion";
 import { CalendarHeart, ChevronUp, MapPin, MessageSquare, MessagesSquare, PhoneCall } from "lucide-react";
-import App from "next/app";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -15,17 +12,6 @@ export default function Home() {
   const [showTop, setShowTop] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [isChatPopUpOpen, setIsChatPopUpOpen] = useState(false);
-  const [isopenModelAppoint, setIsOpenModelAppoint] = useState(false);
-
-    // Hàm để mở modal
-    const handleOpenModal = () => {
-        setIsOpenModelAppoint(true);
-    };
-
-    // Hàm để đóng modal
-    const handleCloseModal = () => {
-        setIsOpenModelAppoint(false);
-    };
 
 
   useEffect(() => {
@@ -54,7 +40,7 @@ export default function Home() {
 
   return (
     <div className="relative">
-      <Menu />
+     
       <LadingPage />
       <Footer />
 
@@ -117,7 +103,7 @@ export default function Home() {
         )
       }
 
-      {
+       {
         showChat && (
           <motion.button
             whileHover={{ scale: 1.1 }}
@@ -128,7 +114,6 @@ export default function Home() {
             style={{
               boxShadow: "0 4px 24px 0 rgba(255, 193, 7, 0.4)",
             }}
-            onClick={handleOpenModal}
           >
             <CalendarHeart size={20} className="group-hover:scale-110 transition-transform duration-300" />
 
@@ -174,8 +159,6 @@ export default function Home() {
 
         </button>
       )}
-
-      <AppointmentModal isOpen={isopenModelAppoint} onClose={handleCloseModal} />
     </div>
   );
 }
