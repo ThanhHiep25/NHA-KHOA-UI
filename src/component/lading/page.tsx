@@ -112,7 +112,7 @@ const LadingPage: React.FC = () => {
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.9 }}
-                            onClick={handleOpenModal} // Sử dụng hàm mới để mở modal
+                            onClick={handleOpenModal} 
                             className="flex items-center md:w-auto w-full justify-center md:gap-2 gap-1 bg-purple-600 hover:bg-blue-700 cursor-pointer text-white font-bold py-3 px-6 rounded-full transition-colors duration-300">
                             <CalendarClockIcon size={30} /> {t('book_consultation_now')}
                         </motion.button>

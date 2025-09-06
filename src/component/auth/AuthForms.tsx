@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
+import { login } from '@/services/auth_api';
 
 interface AuthModalProps {
     isOpen: boolean;
@@ -18,11 +19,23 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
     const [userName, setUserName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
 
-    const handleLoginSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log('Đăng nhập với:', { email, password });
-        onClose(); // Đóng pop-up sau khi gửi form
-    };
+    const handleLoginSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+        const res = await login(email, password);
+        if (res.success) {
+            // Lưu token vào localStorage hoặc cookie nếu cần
+            localStorage.setItem('accessToken', res.data.accessToken);
+            localStorage.setItem('refreshToken', res.data.refreshToken);
+            // Đóng modal hoặc chuyển hướng
+            onClose();
+        } else {
+            alert(res.message || 'Đăng nhập thất bại');
+        }
+    } catch (error) {
+        alert('Đăng nhập thất bại');
+    }
+};
 
     const handleRegisterSubmit = (e: React.FormEvent) => {
         e.preventDefault();
