@@ -40,6 +40,7 @@ export interface LoginResponseData {
   username?: string;
   email?: string;
   role?: string;
+  avatar_url?: string;
   cookies_set?: boolean | string;
   [key: string]: unknown;
 }
@@ -54,6 +55,10 @@ export interface ApiResponse<T = unknown> {
 export type WhoamiData = Record<string, string>;
 export type TokensData = Record<string, string>;
 
+export interface ForgotPasswordPayload {
+  email: string;
+}
+
 export const AuthAPI = {
   register: (payload: RegisterPayload) =>
     http.post<ApiResponse<string>>("/api/auth/register", payload).then((r: AxiosResponse<ApiResponse<string>>) => r.data),
@@ -64,15 +69,45 @@ export const AuthAPI = {
   // Login API call - normalize responses so frontend always gets ApiResponse-like envelope
   login: (payload: LoginPayload, options?: { saveCookies?: boolean }) =>
     http
-      .post<ApiResponse<LoginResponseData> | LoginResponseData>('/api/auth/login', payload, { withCredentials: !!options?.saveCookies })
-      .then((r: AxiosResponse<ApiResponse<LoginResponseData> | LoginResponseData>) => {
+      .post<ApiResponse<LoginResponseData> | LoginResponseData>('/api/auth/login', payload, {
+        withCredentials: !!options?.saveCookies,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      })
+      .then((r: AxiosResponse) => {
         const body = r.data;
+
+        // Handle HTML response (redirect case) - this shouldn't happen with proper headers
+        if (typeof body === 'string' && body.includes('<!DOCTYPE html>')) {
+          // Extract data from redirect URL if available
+          const urlMatch = body.match(/avatar_url=([^&"]+)/);
+          const usernameMatch = body.match(/username=([^&"]+)/);
+          const emailMatch = body.match(/email=([^&"]+)/);
+          const roleMatch = body.match(/role=([^&"]+)/);
+          const tokenMatch = body.match(/access_token=([^&"]+)/);
+
+          if (tokenMatch) {
+            const extractedData = {
+              access_token: decodeURIComponent(tokenMatch[1]),
+              username: usernameMatch ? decodeURIComponent(usernameMatch[1]) : '',
+              email: emailMatch ? decodeURIComponent(emailMatch[1]) : '',
+              role: roleMatch ? decodeURIComponent(roleMatch[1]) : '',
+              avatar_url: urlMatch ? decodeURIComponent(urlMatch[1]) : ''
+            };
+            return { success: true, message: 'Login successful', data: extractedData } as ApiResponse<LoginResponseData>;
+          }
+          throw new Error('Login failed: Received HTML redirect instead of JSON response');
+        }
+
         // If backend already returns ApiResponse-like object, forward it
-        if (body && typeof (body as ApiResponse<LoginResponseData>).success !== 'undefined') {
+        if (body && typeof body.success !== 'undefined') {
           return body as ApiResponse<LoginResponseData>;
         }
         // Otherwise wrap the plain token map into ApiResponse.data
-        return { success: true, message: 'Login successful', data: body as LoginResponseData } as ApiResponse<LoginResponseData>;
+        return { success: true, message: 'Login successful', data: body } as ApiResponse<LoginResponseData>;
       }),
 
   refresh: (payload: RefreshPayload) =>
@@ -106,4 +141,25 @@ export const AuthAPI = {
     const base = (http.defaults.baseURL || "").replace(/\/$/, "");
     return base + "/oauth2/authorization/google";
   },
+
+  forgotPassword: (payload: ForgotPasswordPayload) =>
+    http.post<ApiResponse<string>>("/api/auth/forgot-password", payload).then((r: AxiosResponse<ApiResponse<string>>) => r.data),
 };
+
+// Utility to clear tokens from localStorage and cookies
+export function clearAuthTokens() {
+  // Remove from localStorage
+  try {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('user');
+    localStorage.removeItem('rememberMe');
+  } catch {}
+
+  // Remove access_token cookie
+  try {
+    document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  } catch {}
+}

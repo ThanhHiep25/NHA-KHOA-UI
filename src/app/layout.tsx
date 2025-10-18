@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/hook/providers";
-import { ToastContainer } from "react-toastify";
 import Menu from "@/component/menu/Menu";
+import Footer from "@/component/footer/page";
+import { ToastContainer } from "react-toastify";
+import ScrollTop from "@/component/scrollTop/scroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nha khoa Hoang Binh",
+  title: "Hoang Binh Dental Clinic",
   description: "Nha khoa Hoang Binh",
 };
 
@@ -25,16 +27,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="vi">
+      <head>
+        <link rel="icon" href="/LOGO/tooth.png" sizes="any"  />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased roboto`}
       >
-        <ToastContainer />
         <Menu />
+        <ToastContainer />
         <Providers>
-          {children}       
+          {children}
         </Providers>
+        <ScrollTop />
+        <Footer />
       </body>
     </html>
   );

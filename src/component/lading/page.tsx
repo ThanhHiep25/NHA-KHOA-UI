@@ -52,7 +52,7 @@ const LadingPage: React.FC = () => {
                     initial={{ opacity: 0, y: -50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    src="/LOGO/GCR.mp4" autoPlay loop muted
+                    src="/LOGO/hoangbinhdental.mp4" autoPlay loop muted
                     className="w-full h-full object-cover" />
 
                 <div className="absolute bottom-0 left-0 w-full h-90 bg-gradient-to-t from-purple-900 to-transparent opacity-50"></div>
